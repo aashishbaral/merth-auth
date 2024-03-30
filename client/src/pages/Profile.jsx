@@ -1,4 +1,3 @@
-import { signOut } from "firebase/auth";
 import {
   getDownloadURL,
   getStorage,
@@ -13,6 +12,7 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   signInFailed,
+  signOutUser,
   updateUserFailed,
   updateUserStart,
   updateUserSuccess,
@@ -63,7 +63,7 @@ const Profile = () => {
   const handleSignout = async () => {
     try {
       await fetch("/api/auth/signout");
-      dispatch(signOut());
+      dispatch(signOutUser());
     } catch (error) {
       console.log(error);
     }
