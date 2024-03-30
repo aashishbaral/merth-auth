@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import {
   getDownloadURL,
   getStorage,
@@ -57,6 +58,15 @@ const Profile = () => {
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSignout = async () => {
+    try {
+      await fetch("/api/auth/signout");
+      dispatch(signOut());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -168,7 +178,10 @@ const Profile = () => {
         >
           Delete Account
         </span>
-        <span className="text-red-700 font-semibold cursor-pointer">
+        <span
+          onClick={handleSignout}
+          className="text-red-700 font-semibold cursor-pointer"
+        >
           Sign Out
         </span>
       </div>
